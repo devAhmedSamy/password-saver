@@ -89,7 +89,7 @@ function login() {
       if (!isRight){
         Msg(2, "The username or the password may be wrong. try again.");
       } 
-    }
+    } 
     return checked
   }
   document.title = "Login";
