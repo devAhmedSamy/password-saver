@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <!-- <script src="main.js"></script> -->
+    <link rel="stylesheet" href="style.css" />
+
+    <% if (css == "index"){ %>
+    <link rel="stylesheet" href="index.css" />
+    <% } %> <% if (css == "log"){ %>
+    <link rel="stylesheet" href="log.css" />
+    <% } %>
+  </head>
+  <body>
+    <% if (css == "index"){ %>
+
+    <header>
+      <div class="container">
+        <div class="logo">Password App</div>
+        <div class="name">
+          <div class="text">
+            <span class="first"><%= [...title][0].toUpperCase() %></span> <%=
+            title %>
+          </div>
+          <a class="logout">
+            <!-- <div class="username"><%= title %></div> -->
+            <span class="material-symbols-outlined">logout</span> logout
+          </a>
+        </div>
+      </div>
+    </header>
+    <% } %>
+  </body>
+</html>

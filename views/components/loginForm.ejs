@@ -1,0 +1,20 @@
+<form class="login" style="display: grid;" method="post" action="/login">
+  <h1>Login</h1>
+  <div class="username">
+
+    <label for="#loginUsername">Enter the user name:</label>
+    <input autofocus type="text" name="userName" id="loginUsername" placeholder="username">
+  <div class="note usernameMsg">this is a note for username input</div>
+  </div>
+
+<div class="password">
+
+<label for="#loginPassword">Enter the password:</label>
+  <input name="password" id="loginPassword" type="password" placeholder="password">
+  <div class="note passMsg">this is a note for password input</div>
+</div>
+  
+  
+  <button class="submit">Submit</button>
+  <div class="noAccount">Don't have an account?<a id="sign">Sign up</a></div>
+</form>

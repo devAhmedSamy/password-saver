@@ -1,0 +1,30 @@
+<form class="sign" style="display: none;" method="post" action="/sign">
+  <h1>Sign up</h1>
+  <div class="name">
+    <label for="#name">Enter your name:</label>
+    <input type="text" name="name" id="name" placeholder="your name" />
+    <div class="note nameMsg"></div>
+  </div>
+  <div class="username">
+    <label for="#username">Enter the user name:</label>
+    <input
+      type="text"
+      name="userName"
+      id="signUserName"
+      placeholder="username"
+    />
+    <div class="note usernameMsg"></div>
+  </div>
+  <div class="password">
+    <label for="#password">Enter the password:</label>
+    <input
+    name="password"
+    id="signPassword"
+    type="password"
+    placeholder="password"
+    />
+    <div class="note passMsg"></div>
+  </div>
+  <button class="submit">Submit</button>
+  <div class="noAccount">Do you have an account?<a id="log">Log in</a></div>
+</form>

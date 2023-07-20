@@ -1,0 +1,199 @@
+@import url("/style.css");
+  /* --main-color: #019a78;
+  --background-color: #a74703;
+  --black: #000;
+  --white: #fff;
+  --blue: rgb(0, 170, 255);
+  --red: red;
+  --font-logo: 40px;
+  --font-big: 34px;
+  --font-normal: 26px;
+  --font-small: 20px;
+  --font-tiny: 15px; */
+/*   
+====== Font families ========
+  'Noto Sans Display'
+  'Carter One' 
+*/
+
+
+
+
+
+header {
+  background-color: var(--white-e);
+  width: 100%;
+  top: 0;
+  right: 0;
+  margin-bottom: 10px;
+  padding: 10px 0;
+  position: sticky;
+  z-index: 50;
+}
+header .logo {
+  font-size: var(--font-big);
+  color: var(--main-color);
+  font-weight: bold;
+  user-select: none;
+}
+
+header .name {
+  border: 1px solid var(--main-color);
+  padding: 5px;
+  border-radius: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+header .name .text {
+  font-size: var(--font-tiny);
+  color: var(--main-color);
+  display: flex;
+  align-items: center;
+}
+.name .text .first {
+  color: var(--white);
+  background: var(--main-color);
+  font-size: var(--font-small);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 3px;
+}
+
+header .logout {
+  opacity: 0;
+  bottom: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 50%;
+  transform: translate(50%, 20px);
+  color: var(--main-color);
+  position: absolute;
+  background-color: var(--white);
+  padding: 10px;
+  transition: all .3s cubic-bezier(0, 0.71, 0.44, 0.99);
+  font-size: var(--font-small);
+  border-radius: 15px;
+  cursor: pointer;
+  z-index: 5;
+  border: 1px solid var(--main-color);
+}
+header .logout::after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  width: 20px;
+  height: 13px;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  transition: top 0.2s ease-in-out;
+  background-color: var(--main-color);
+}
+.show .logout {
+  opacity: 1;
+  transform: translate(50%, calc(100% + 20px))
+}
+.show .logout::after {
+  top: -13px;
+}
+.logout .material-symbols-outlined {
+  font-size: var(--font);
+}
+/* .username {
+  white-space: nowrap;
+  border-bottom: 1px solid var(--black);
+} */
+
+form {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: var(--white-e);
+  padding: 20px;
+  justify-content: space-evenly;
+  z-index: 1;
+}
+
+.enter {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 5px;
+  color: var(--main-color)
+}
+
+.link {
+  width: 100%;
+  display: block;
+  background-color: #fffa;
+  border-bottom: 2px solid var(--white);
+}
+input {
+  margin: 5px;
+  text-align: center;
+}
+button {
+  display: inline-block;
+  background-color: var(--white);
+  color: var(--black)
+}
+.result-cont {
+  margin-top: 20px;
+  width: 100%;
+  padding: 0 0px;
+  background-color: var(--white-e);
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.result-cont h1 {
+  background-color: var(--main-color);
+  width: 100%;
+  color: var(--white);
+  letter-spacing: 1.3px;
+  font-weight: normal;
+}
+.result {
+  display: inline-block;
+  background: var(--main-color);
+  padding: 10px;
+  color: var(--white);
+  text-align: center;
+  border-radius: 12px;
+  transition: 0.2s all ease-in-out;
+  cursor: pointer;
+  margin: 5px;
+  user-select: none;
+}
+.result:hover {
+  border-radius: 8px;
+  transform: scale(1.05);
+  background-color: var(--blue);
+}
+.result:hover i {
+  letter-spacing: 1px;
+}
+.result i {
+  transition: 0.2s all ease-in-out;
+  display: block;
+  font-size: var(--font-tiny);
+  font-style: normal;
+}
+.result .delete {
+  background-color: var(--blue);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px
+}
+.result .delete:hover {
+  background-color: var(--main-color);
+}

@@ -1,0 +1,28 @@
+<%- include("components/header") %>
+<div class="container">
+<form action="/send" method="post">
+  <input name="id" type="hidden" value="<%= id %>">
+  <label class="enter" for="#link">Enter the Link:</label>
+  <input required autofocus type="text" name="link" class="link">
+  
+  <label class="enter" for="#password">Enter the Password:</label>
+  <input required type="text" id="password" name="password" class="link">
+
+  <div class="search">Search</div>
+  <button class="add">Add new</button>
+</form>
+</div>
+
+  <div class="container result-cont">
+  <h1>Your Passwords</h1>
+    <% result.forEach((obj)=>{ %>
+        <div data-pass="<%=obj.password%>" data-id="<%= obj.id %>" class="result"> <%= obj.link %> 
+          <i>click to copy</i>
+          <span class="delete material-symbols-outlined">delete</span>
+        </div>
+      <% }) %>
+  </div>
+<script defer src="index.js"></script>
+</body>
+</html>
+    <!-- <a href="/">Password Site</a> -->
