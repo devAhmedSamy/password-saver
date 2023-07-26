@@ -1,4 +1,12 @@
-function req(fullLink, method = "post") {
+/* main variables */
+let form = document.forms[0];
+let passwordsContainer = document.querySelector(".result-cont");
+let allPasswordsElements = document.querySelectorAll(".result");
+let id = form.id.value;
+let logout = document.querySelector(".logout");
+let nameL = document.querySelector(".container .name");
+/* functions */
+function req(fullLink, method = "get") {
   return new Promise((resolve, reject) => {
     let request = new XMLHttpRequest();
     request.open(method, `${fullLink}`);
@@ -9,59 +17,55 @@ function req(fullLink, method = "post") {
   });
 }
 
-function sendData(link) {
-  return new Promise((resolve, reject) => {
-    let r = new XMLHttpRequest();
-    r.open("post", `http://localhost:3500/sendpass&${link}`);
-    r.send();
-    r.onload = function () {
-      resolve(true);
-    };
-  });
-}
-
-// console.log(getData())
-
-// getData().then((res) => {
-//   console.log(res)
-// })
-
-let logout = document.querySelector(".logout");
-let form = document.forms[0];
-let resscont = document.querySelector(".result-cont");
-
-let id = form.id.value;
-
-
-
-
-
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  let link = form.link.value;
-  let password = form.password.value;
-  form.link.value = "";
-  form.password.value = "";
-  form.link.focus();
-  let re = document.createElement("div");
+async function createPassElement({ linkId, link, password }) {
+  let passDiv = document.createElement("div");
+  passDiv.classList.add("result");
+  passDiv.setAttribute("data-pass", password);
+  passDiv.setAttribute("data-id", linkId);
+  passDiv.innerText = link;
+  passDiv.addEventListener("click", copy)
   let i = document.createElement("i");
-  let linkId = `${Date.now()}${Math.floor(Math.random() * 10)}`;
-  let span = document.createElement("span");
-  span.classList.add("material-symbols-outlined");
-  span.classList.add("delete");
-  span.innerText = "delete";
-  span.addEventListener("click", deleteResult)
-  re.classList.add("result");
-  re.setAttribute("data-pass", password);
-  re.setAttribute("data-id", linkId);
-  re.innerText = link;
   i.innerText = "Click to copy";
-  re.append(i);
-  re.append(span);
-  resscont.append(re);
-  resultC = document.querySelectorAll(".result");
-  console.log(await req(`/sendpass&${id}&${linkId}&${link}&${password}`));
-});
+
+  let delIcon = document.createElement("span");
+  delIcon.classList.add("material-symbols-outlined");
+  delIcon.classList.add("delete");
+  delIcon.innerText = "delete";
+  delIcon.addEventListener("click", deleteResult);
+
+  passDiv.append(i);
+  passDiv.append(delIcon);
+  passwordsContainer.append(passDiv);
+
+  // allPasswordsElements = resultC = document.querySelectorAll(".result");
+  let r = await req(
+    `/pass?userId=${id}&linkId=${linkId}&link=${link}&password=${password}`,
+    "post"
+  );
+  console.log(r);
+
+  checkForDelete();
+}
+async function deleteResult() {
+  let linkId = this.parentElement.getAttribute("data-id");
+  console.log(await req(`/pass?userId=${id}&linkId=${linkId}`, "delete"));
+  passwordsContainer.removeChild(this.parentElement);
+  checkForDelete();
+}
+function copy(e) {
+
+  if (e.target != this.children[1]) {
+    navigator.clipboard.writeText(this.getAttribute("data-pass"));
+    console.log("copied!" + this.getAttribute("data-pass"));
+  }
+}
+function checkForDelete() {
+  if (passwordsContainer.childElementCount == 1) {
+    passwordsContainer.style.display = "none";
+  } else {
+    passwordsContainer.style.display = "flex";
+  }
+}
 
 function dropDownItem(item) {
   item.parentElement.addEventListener("click", () => {
@@ -72,52 +76,28 @@ function dropDownItem(item) {
       }
     });
   });
+  item.onclick = () =>{
+    if (item.parentElement.classList.contains("show")){
+      window.location.replace("/")
+    }
+  }
 }
+/* events */
+form.addEventListener("submit", async (element) => {
+  element.preventDefault();
+  let link = form.link.value;
+  let password = form.password.value;
+  form.link.value = "";
+  form.password.value = "";
+  form.link.focus();
+  let linkId = `${Date.now()}${Math.floor(Math.random() * 10)}`;
+  createPassElement({ linkId, link, password });
+});
+allPasswordsElements.forEach((passwordElement) => {
+  passwordElement.children[1].addEventListener("click", deleteResult);
+  passwordElement.addEventListener("click", copy);
+});
+
+window.onload = checkForDelete;
+
 dropDownItem(logout);
-
-logout.onclick = () => {
-  if (logout.parentElement.classList.contains("show")) {
-    window.location.replace("/");
-  }
-};
-
-  
-function deleteResult(){
-  let resultsDel = document.querySelectorAll(".result .delete")
-  resultsDel.forEach((resultDel)=>{
-    resultDel.addEventListener("click", (eo) => {
-      let linkId = resultDel.parentElement.getAttribute("data-id");
-        req(`/delete-pass&${id}&${linkId}`).then(() => {
-          resscont.removeChild(resultDel.parentElement);
-        });
-    })
-  })
-}
-deleteResult()
-function fff(resultC) {
-  resultC.forEach((result) => {
-    result.addEventListener("click", function (element) {
-      console.log(element.target);
-      console.log(result.children[3]);
-      if (element.target == result.childNodes[3]) {
-        let linkId = this.getAttribute("data-id");
-        req(`/delete-pass&${id}&${linkId}`).then(() => {
-          resscont.removeChild(this);
-        });
-      } else {
-        navigator.clipboard.writeText(this.getAttribute("data-pass"));
-        /* مؤقتا لحد ما تعمل اشعار حلو */
-        result.childNodes[1].innerText = "copied!";
-        setTimeout(() => {
-          result.childNodes[1].innerText = "Click to copy";
-        }, 1000);
-      }
-    });
-  });
-}
-
-decodeURIComponent(document.cookie).split(";").forEach((e)=>{
-  if (e.split("=")[0] == "username"){
-      console.log(e.split("=")[1])
-  }
-})

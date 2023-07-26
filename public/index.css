@@ -39,7 +39,7 @@ header .logo {
 
 header .name {
   border: 1px solid var(--main-color);
-  padding: 5px;
+  padding: 0 5px;
   border-radius: 20px;
   position: relative;
   display: flex;
@@ -197,3 +197,7 @@ button {
 .result .delete:hover {
   background-color: var(--main-color);
 }
+
+
+
+

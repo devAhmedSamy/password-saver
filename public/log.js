@@ -1,5 +1,10 @@
 /* ctrl + shift + [ => fold the current bracket */
-function getData(link = "/users") {
+
+import validateForm from "./validate.js"
+
+
+console.log(validateForm("ahmed", "ali"))
+/* function getData(link = "/users") {
   return new Promise((resolve, reject) => {
     let r = new XMLHttpRequest();
     r.open("GET", `http://localhost:3500${link}`);
@@ -200,3 +205,4 @@ function sign() {
     }
   });
 }
+ */
