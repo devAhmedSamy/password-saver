@@ -117,10 +117,6 @@ form.addEventListener("submit", async (e) => {
 }
 
 
-
-
-
-
 function sign() {
   let notesArr = [
     document.querySelector(".sign .nameMsg"),
